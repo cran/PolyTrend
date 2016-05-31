@@ -13,9 +13,15 @@ function(x, fig.dates = c(1:length(x$Y)),  xlab = "Year", ylab = "NDVI", fig.tex
   strSignificance <- "sig."
   if(x$Significance < 0) strSignificance <- "in-sig."
   strSlope <- paste("Slope=",round(x$Slope, 4), sep = "")
-  strLabel <- paste(strTrendType[x$TrendType+2],strSlope,strSignificance,sep = ", ")
   
-  legend("topleft", strLabel, bty = "n", cex=0.7, text.font = 1, y.intersp=1)
+  strTrendType.Text <- strTrendType[x$TrendType+2]
+  if(x$TrendType==-1 && x$PolynomialDegree > 1) {
+          strForm = c("(quadratic form)","(cubic form)")
+          strTrendType.Text <- paste(strTrendType.Text, strForm[x$PolynomialDegree-1], sep = " ")
+  }
+  
+  strLabel <- paste(strTrendType.Text,strSlope,strSignificance,sep = ", ")
+  legend("topleft", strLabel, bty = "n", cex=0.9, text.font = 1, y.intersp=1)
   
   
   if(x$PolynomialDegree == 1) {

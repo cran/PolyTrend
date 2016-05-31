@@ -6,7 +6,7 @@
 Trend Classification Algorithm
 }
 \description{
-This algorithm can classify the trends as linear, quadratic, cubic, concealed or no-trend. The "concealed trend" are those trends that possess quadratic or cubic forms, but the net change between the start and end of the period hasn't been significant. While, the "no-trend" category includes simple linear trends that are below the significant slope coefficient.
+PolyTrend classifies the trends into linear, quadratic, cubic, concealed and no-trend types. The "concealed trends" are those trends that possess quadratic or cubic forms, but the net change from the start of the time period to the end of the time period hasn't been significant. The "no-trend" category includes simple linear trends with statistically in-significant slope coefficient.
 }
 \usage{
 PolyTrend(Y, alpha)
@@ -22,29 +22,22 @@ PolyTrend(Y, alpha)
 }
 }
 \details{
-An object of the class "PT" is a list with the trend type, slope, direction, and statistical
-significance.
+An object of the class "PT" is a list including the trend type, slope, direction, and statistical significance.
 }
 
 \value{
 
-\item{TrendType}{the trend type as a number, which can be equal to: -1,0,1,2 and 3. The values correspond to
-a concealed trend (-1), no trend (0), linear trend (1), quadratic trend (2) or cubic trend (3).}
+\item{TrendType}{the trend type as a number, which can be -1, 0, 1, 2, or 3. The values correspond to a concealed trend (-1), no trend (0), linear trend (1), quadratic trend (2) or cubic trend (3).}
 \item{Slope}{the linear slope value.}
-\item{Direction}{the linear slope direction as number, which could be equal to 1 or -1. These values
-correspond to positive or negative direction.}
-\item{Significance}{the polynomial significance as a number that can be -1 or 1, which correspond to statistically
-insignificant or statistically significant respectively.}
-\item{PolynomialDegree}{the polynomial degree as a number. This variable can be: 0, 1, 2 or 3, which corresponds to
-no trend, linear, quadratic or cubic trend.}
+\item{Direction}{the linear slope direction as a number, which can be 1 or -1. The values correspond to increasing (1) or decreasing direction (-1).}
+\item{Significance}{the slope significance as a number, which can be 1 or -1. The values correspond to statistically significant (1) or statistically in-significant (-1).}
+\item{PolynomialDegree}{the polynomial degree as a number, which can be 0, 1, 2, or 3. The values correspond to no-trend (0), linear (1), quadratic (2), or cubic (3).}
 }
 
 \references{
-Jamali, S, Seaquist, J, Eklundh, L, & Ardö, J 2014, 'Automated mapping of vegetation trends with
-polynomials using NDVI imagery over the Sahel', Remote Sensing Of Environment, 141, pp. 79-89,
-ScienceDirect, EBSCOhost.
+Jamali S, Seaquist J, Eklundh L, Ardö J (2014). Automated mapping of vegetation trends with polynomials using NDVI imagery over the Sahel. Remote Sensing of Environment, 141, 79-89. http://dx.doi.org/10.1016/j.rse.2013.10.019
 
-Tomov, H. 2016, 'Automated temporal NDVI analysis over the Middle East for the period 1982 - 2010', http://lup.lub.lu.se/student-papers/record/8871893
+Tomov H (2016). Automated temporal NDVI analysis over the Middle East for the period 1982 – 2010. http://lup.lub.lu.se/student-papers/record/8871893
 
 }
 \author{
@@ -53,8 +46,8 @@ Sadegh Jamali, Hristo Tomov
 
 \examples{
 
-\dontrun{
-## Examples of a cubic trend (Site 1 & Site 2, Jamali et al. 2014)
+## Following examples are taken from Fig. 3 in Jamali et al. 2014
+## Examples of a cubic trend (Site 1 & Site 2)
 data(ex.a)
 data(ex.b)
 
@@ -64,27 +57,27 @@ plot(pt.a, fig.dates = c(1982:2006))
 pt.b <- PolyTrend(ex.b, 0.05)
 plot(pt.b, fig.dates = c(1982:2006))
 
-## Examples of a concealed trend (Site 3 & Site 4, Jamali et al. 2014)
+## Examples of a concealed trend with cubic form (Site 3 & Site 4)
 data(ex.c)
-data(ex.e)
+data(ex.d)
 
 pt.c <- PolyTrend(ex.c, 0.05)
 plot(pt.c, fig.dates = c(1982:2006))
 
-pt.e <- PolyTrend(ex.e, 0.05)
-plot(pt.e, fig.dates = c(1982:2006))
-
-## Examples of a quadratic trend (Site 5 & Site 6, Jamali et al. 2014)
-data(ex.d)
-data(ex.f)
-
 pt.d <- PolyTrend(ex.d, 0.05)
 plot(pt.d, fig.dates = c(1982:2006))
+
+## Examples of a quadratic trend (Site 5 & Site 6)
+data(ex.e)
+data(ex.f)
+
+pt.e <- PolyTrend(ex.e, 0.05)
+plot(pt.e, fig.dates = c(1982:2006))
 
 pt.f <- PolyTrend(ex.f, 0.05)
 plot(pt.f, fig.dates = c(1982:2006))
 
-## Examples of a concealed trend (Site 7 & Site 8, Jamali et al. 2014)
+## Examples of a concealed trend with quadratic form (Site 7 & Site 8)
 data(ex.g)
 data(ex.h)
 
@@ -94,7 +87,7 @@ plot(pt.g, fig.dates = c(1982:2006))
 pt.h <- PolyTrend(ex.h, 0.05)
 plot(pt.h, fig.dates = c(1982:2006))
 
-## Examples of a linear trend (Site 9 & Site 10, Jamali et al. 2014)
+## Examples of a linear trend (Site 9 & Site 10)
 data(ex.k)
 data(ex.m)
 
@@ -104,13 +97,13 @@ plot(pt.k, fig.dates = c(1982:2006))
 pt.m <- PolyTrend(ex.m, 0.05)
 plot(pt.m, fig.dates = c(1982:2006))
 
-## Example of a no-trend (Site 11, Jamali et al. 2014)
+## Example of a no-trend (Site 11)
 data(ex.n)
 
 pt.n <- PolyTrend(ex.n, 0.05)
 plot(pt.n, fig.dates = c(1982:2006))
 
-}
+
 
 
 }
